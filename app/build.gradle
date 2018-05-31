@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "27.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.tyj.learn"
-        minSdkVersion 15
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -15,6 +15,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
         }
     }
 }
@@ -26,4 +32,22 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.+'
     testCompile 'junit:junit:4.12'
+    compile(name:'module1-debug', ext:'aar')
+    compile(
+            //Java
+            rootProject.ext.pajfLibrary,
+            rootProject.ext.pajfLibraryRxHttp,
+            rootProject.ext.commonsLang3,
+            rootProject.ext.commonsCodec,
+            rootProject.ext.commonsIo,
+            rootProject.ext.guava,
+            rootProject.ext.gson,
+            rootProject.ext.rxJava2,
+            rootProject.ext.retrofit2,
+            rootProject.ext.retrofit2GsonConverter,
+            rootProject.ext.retrofit2Rxjava2Adapter,
+            rootProject.ext.okhttp3Logging,
+    )
+
+
 }
